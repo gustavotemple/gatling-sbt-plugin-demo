@@ -12,7 +12,7 @@ import scala.sys.process._
 
 object GatlingTestRunner {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val simClass = classOf[GatlingTest].getName
 
@@ -20,8 +20,8 @@ object GatlingTestRunner {
     props.simulationClass(simClass)
     props.runDescription("GatlingTest Runner")
     props.resourcesDirectory("./src/main/scala")
-    props.binariesDirectory("./target/scala-2.12/classes")
-    props.simulationsDirectory("./src/test/scala/gatling")
+    props.binariesDirectory("./target/scala-2.13/test-classes/gatling")
+    //props.simulationsDirectory("./src/test/scala/gatling")
 
     Gatling.fromMap(props.build)
   }
@@ -120,7 +120,7 @@ class GatlingTest extends Simulation {
 
           val profiler =
             s"/root/async-profiler/profiler.sh -d $time -f /tmp/$title.svg --title $title -e itimer $pid"
-          profiler.run
+          profiler.run()
       }
     }
   }
